@@ -1,0 +1,32 @@
+version: "local"
+spring:
+  application:
+    name: "users"
+  config:
+    import: "optional:configserver:http://localhost:8071/"
+  cloud:
+    config:
+      enabled: true
+  datasource:
+    url: "jdbc:mysql://localhost:3306/booking"
+    username: "root"
+    password: "12345"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: "http://localhost:8070/eureka/"
+info:
+  app:
+    name: "users"
+    description: "API for users"
+    version: "1.0.0"

@@ -1,0 +1,21 @@
+server:
+  port: 8072
+spring:
+  application:
+    name: "apigateway"
+  config:
+    import: "optional:configserver:http://localhost:8071/"
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+          lowerCaseServiceId: true
+      httpclient:
+        connect-timeout: 1000
+        response-timeout: 2s
+info:
+  app:
+    name: "API Gateway"
+    description: "API Gateway"
+    version: "1.0.0"
