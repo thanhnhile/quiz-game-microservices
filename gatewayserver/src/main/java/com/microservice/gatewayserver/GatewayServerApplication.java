@@ -1,4 +1,4 @@
-package com.microservice.apigateway;
+package com.microservice.gatewayserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,16 +6,20 @@ import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 
+//http://localhost:8072/webjars/swagger-ui/index.html
 @SpringBootApplication
-public class ApigatewayApplication {
+public class GatewayServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ApigatewayApplication.class, args);
+		SpringApplication.run(GatewayServerApplication.class, args);
 	}
 
 	@Bean
 	public RouteLocator configRouteLocator(RouteLocatorBuilder builder) {
 		return builder.routes()
+				.route(p -> p.path("/users/v3/api-docs")
+						.filters(f -> f.rewritePath("/api/users/(?<segment>.*)", "/${segment}"))
+						.uri("lb://USERS/v3/api-docs"))
 				.route(p -> p.path("/api/users/**")
 						.filters(f -> f.rewritePath("/api/users/(?<segment>.*)", "/${segment}"))
 						.uri("lb://USERS"))

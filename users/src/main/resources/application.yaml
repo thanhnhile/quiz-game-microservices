@@ -17,16 +17,23 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-eureka:
-  instance:
-    preferIpAddress: true
-  client:
-    fetchRegistry: true
-    registerWithEureka: true
-    serviceUrl:
-      defaultZone: "http://localhost:8070/eureka/"
+  debug: true
 info:
   app:
     name: "users"
     description: "API for users"
     version: "1.0.0"
+springdoc:
+  api-docs:
+    enabled: true
+    path: /users/v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /users/swagger-ui.html
+logging:
+  level:
+    org:
+      springframework: DEBUG
+    com:
+      microservice:
+        users: DEBUG
