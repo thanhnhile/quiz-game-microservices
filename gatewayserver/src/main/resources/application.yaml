@@ -31,3 +31,17 @@ info:
     name: "API Gateway"
     description: "API Gateway"
     version: "1.0.0"
+logging:
+  level:
+    org:
+    springframework: INFO
+    com:
+      microservice:
+        gatewayserver: DEBUG
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 2
+      failureRateThreshold: 50
+      waitDurationInOpenState: 10000

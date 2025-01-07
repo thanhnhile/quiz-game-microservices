@@ -33,7 +33,7 @@ springdoc:
 logging:
   level:
     org:
-      springframework: DEBUG
+      springframework: INFO
     com:
       microservice:
         users: DEBUG

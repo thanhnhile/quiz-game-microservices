@@ -29,8 +29,14 @@
 	<properties>
 		<java.version>17</java.version>
 		<spring-cloud.version>2024.0.0</spring-cloud.version>
+		<common.version>0.0.1-SNAPSHOT</common.version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>com.microservice</groupId>
+			<artifactId>common</artifactId>
+			<version>${common.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
