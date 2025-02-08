@@ -2,6 +2,8 @@ package com.microservice.users.controller;
 
 import com.microservice.common.dto.FallbackContactDto;
 import com.microservice.users.dto.UserCreateDto;
+import com.microservice.users.dto.UserProfileCreateDto;
+import com.microservice.users.dto.UserProfileResponseDto;
 import com.microservice.users.dto.UserResponseDto;
 import com.microservice.users.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,27 +30,15 @@ public class UserController{
 
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
-    @Value("${version}")
-    private String version;
-
     private final UserService userService;
 
-    private final FallbackContactDto fallbackContactDto;
-
-    public UserController(UserService userService, FallbackContactDto fallbackContactDto) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.fallbackContactDto = fallbackContactDto;
-    }
-
-
-    @GetMapping("/version")
-    public String getVersion(){
-        return version;
     }
 
     @Operation(
             summary = "Create User REST API",
-            description = "REST API to create new User"
+            description = "REST API to create new user"
     )
     @ApiResponses({
             @ApiResponse(
@@ -63,8 +53,20 @@ public class UserController{
         return userService.createUser(dto);
     }
 
-    @GetMapping("/fallback")
-    public FallbackContactDto fallback(){
-        return fallbackContactDto;
+    @Operation(
+            summary = "Create User Profile REST API",
+            description = "REST API to create user profile"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "201",
+                    description = "HTTP Status CREATED"
+            )
     }
+    )
+    @PostMapping("/create-profile")
+    public UserProfileResponseDto createUserProfile(@RequestBody @Valid UserProfileCreateDto dto) {
+        return userService.createUserProfile(dto);
+    }
+
 }

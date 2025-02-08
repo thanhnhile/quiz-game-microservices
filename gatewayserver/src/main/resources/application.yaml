@@ -14,6 +14,20 @@ spring:
       httpclient:
         connect-timeout: 1000
         response-timeout: 2s
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            token-uri: http://localhost:8090/realms/booking-microservices/protocol/openid-connect/token
+        registration:
+          keycloak:
+            client-id: booking-microservices-user
+            client-secret: 8ekZimKROp7kKzmPlemdJcuCwHG02bCn
+            authorization-grant-type: client_credentials
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8090/realms/booking-microservices
 springdoc:
   api-docs:
     enabled: true
@@ -26,6 +40,8 @@ springdoc:
         url: /v3/api-docs
       - name: user-service
         url: /users/v3/api-docs
+      - name: ticket-service
+        url: /tickets/v3/api-docs
 info:
   app:
     name: "API Gateway"
@@ -41,7 +57,7 @@ logging:
 resilience4j.circuitbreaker:
   configs:
     default:
-      slidingWindowSize: 10
+      slidingWindowSize: 5
       permittedNumberOfCallsInHalfOpenState: 2
       failureRateThreshold: 50
       waitDurationInOpenState: 10000

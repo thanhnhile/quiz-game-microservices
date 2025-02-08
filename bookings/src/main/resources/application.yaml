@@ -1,14 +1,15 @@
-version: "local"
+server:
+  port: 8081
 spring:
   application:
-    name: "users"
+    name: bookings
   config:
     import: "optional:configserver:http://localhost:8071/"
   cloud:
     config:
       enabled: true
   datasource:
-    url: "jdbc:mysql://localhost:3306/users"
+    url: "jdbc:mysql://localhost:3306/booking"
     username: "root"
     password: "12345"
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -20,24 +21,20 @@ spring:
   debug: true
 info:
   app:
-    name: "users"
-    description: "API for users"
+    name: "tickets"
+    description: "API for tickets"
     version: "1.0.0"
 springdoc:
   api-docs:
     enabled: true
-    path: /users/v3/api-docs
+    path: /v3/api-docs
   swagger-ui:
     enabled: true
-    path: /users/swagger-ui.html
+    path: /v3/swagger-ui.html
 logging:
   level:
     org:
       springframework: INFO
     com:
       microservice:
-        users: DEBUG
-keycloak:
-  realm: "booking-microservices"
-  client-id: "booking-microservices-user"
-  client-secret: "8ekZimKROp7kKzmPlemdJcuCwHG02bCn"
+        tickets: DEBUG
